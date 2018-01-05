@@ -23,7 +23,7 @@ import java.util.*;
 /**
  * Created by Administrator on 2018/1/4.
  */
-public class Data {
+public class Kafka {
     public static void main(String[] args) {
 
         try {
@@ -47,8 +47,6 @@ public class Data {
             lines.foreachRDD(x-> System.out.println(x));
             System.out.println("数据总条数：");
             lines.count().print();
-
-
 
             jssc.start();              // Start the computation
             jssc.awaitTermination();   // Wait for the computation to terminate
