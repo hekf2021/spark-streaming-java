@@ -28,16 +28,20 @@ public class Kafka {
 
         try {
             SparkConf conf = new SparkConf().setAppName("NetworkWordCount").setMaster("local[3]");
-            JavaStreamingContext jssc = new JavaStreamingContext(conf, new Duration(5000));
+
+            //初始化SparkSession 方便后面进行sql操作
             SparkSession spark = SparkSession.builder().config(conf).enableHiveSupport().getOrCreate();
             spark.sql("use kh");
-//            JavaRDD<Row> dateRdd = spark.sql("select * from info0017").toJavaRDD();
-//            System.out.println("count=="+dateRdd.count());
-//            System.out.println(dateRdd.collect());
+//          JavaRDD<Row> dateRdd = spark.sql("select * from info0017").toJavaRDD();
+//          System.out.println("count=="+dateRdd.count());
+//          System.out.println(dateRdd.collect());
+
+            //初始化spark流
+            JavaStreamingContext jssc = new JavaStreamingContext(conf, new Duration(5000));
             jssc.checkpoint("D:/check");
-            Map<String, Integer> topicMap = new HashMap<String, Integer>();
-            topicMap.put("mt02",10);
-            JavaPairReceiverInputDStream<String, String> messages = KafkaUtils.createStream(jssc, "172.16.50.21:2181", "1", topicMap);
+            Map<String, Integer> topic = new HashMap<String, Integer>();
+            topic.put("mt02",10);
+            JavaPairReceiverInputDStream<String, String> messages = KafkaUtils.createStream(jssc, "172.16.50.21:2181", "1", topic);
             JavaDStream<String> lines = messages.map(new Function<Tuple2<String, String>, String>() {
                 public String call(Tuple2<String, String> tuple2) {
                     System.out.println("bbbb==="+tuple2._2());
