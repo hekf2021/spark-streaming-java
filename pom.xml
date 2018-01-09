@@ -43,6 +43,11 @@
       <artifactId>scala-actors</artifactId>
       <version>2.11.8</version>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.40</version>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
