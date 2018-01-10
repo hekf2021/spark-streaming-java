@@ -25,10 +25,10 @@ public class Jdbc {
         SparkSession spark = SparkSession.builder().config(conf).enableHiveSupport().getOrCreate();
         Dataset<Row> jdbcDF = spark.read()
                 .format("jdbc")
-                .option("url", "jdbc:mysql://172.16.50.21:3306/abc")
+                .option("url", "jdbc:mysql://ip:3306/abc")
                 .option("dbtable", "info")
                 .option("user", "root")
-                .option("password", "chinacloudroot")
+                .option("password", "xxx")
                 .option("partitionColumn", "apk")
                 .option("lowerBound", "0001")
                 .option("upperBound", "0006")

@@ -41,7 +41,7 @@ public class Kafka {
             jssc.checkpoint("D:/check");
             Map<String, Integer> topic = new HashMap<String, Integer>();
             topic.put("mt02",10);
-            JavaPairReceiverInputDStream<String, String> messages = KafkaUtils.createStream(jssc, "172.16.50.21:2181", "1", topic);
+            JavaPairReceiverInputDStream<String, String> messages = KafkaUtils.createStream(jssc, "ip:2181", "1", topic);
             JavaDStream<String> lines = messages.map(new Function<Tuple2<String, String>, String>() {
                 public String call(Tuple2<String, String> tuple2) {
                     System.out.println("bbbb==="+tuple2._2());
